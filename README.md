@@ -1,4 +1,4 @@
-# check-preconditions [![Build Status](https://travis-ci.org/pnann/check-preconditions.svg)](https://travis-ci.org/pnann/check-preconditions) ![npm dependencies](https://david-dm.org/pnann/check-preconditions.svg)
+# check-preconditions [![Build Status](https://travis-ci.org/pnann/check-preconditions.svg)](https://travis-ci.org/pnann/check-preconditions) ![npm dependencies](https://david-dm.org/pnann/check-preconditions.svg) [![Coverage Status](https://coveralls.io/repos/pnann/check-preconditions/badge.svg?branch=master&service=github)](https://coveralls.io/github/pnann/check-preconditions?branch=master)
 
 > A small and simple ES3 compatible preconditions library for Node and the browser.
 
