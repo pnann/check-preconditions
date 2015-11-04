@@ -1,6 +1,7 @@
 var browserify = require("browserify");
 var buffer = require("vinyl-buffer");
 var collapse = require("bundle-collapser/plugin");
+var coveralls = require("gulp-coveralls");
 var del = require("del");
 var gulp = require("gulp");
 var gutil = require("gulp-util");
@@ -77,6 +78,11 @@ gulp.task("test", ["pre-test"], function () {
         .pipe(mocha({reporter: "nyan"}))
         .pipe(istanbul.writeReports())
         .pipe(istanbul.enforceThresholds({thresholds: {global: 100}}));
+});
+
+gulp.task("coveralls", function () {
+    return gulp.src("./coverage/lcov.info")
+        .pipe(coveralls());
 });
 
 gulp.task("watch-test", ["test"], function () {
