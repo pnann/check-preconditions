@@ -76,7 +76,7 @@ gulp.task("test", ["pre-test"], function () {
     return gulp.src(compiledTestGlob, {read: false})
         .pipe(mocha({reporter: "nyan"}))
         .pipe(istanbul.writeReports())
-        .pipe(istanbul.enforceThresholds({thresholds: {global: 90}}));
+        .pipe(istanbul.enforceThresholds({thresholds: {global: 100}}));
 });
 
 gulp.task("watch-test", ["test"], function () {
