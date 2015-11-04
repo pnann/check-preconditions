@@ -35,14 +35,14 @@ var tsTestProject = ts.createProject({
 });
 
 gulp.task("tsd", function (done) {
-    return tsd({
+    tsd({
         command: "reinstall",
         latest: true,
         config: "./tsd.json"
     }, done);
 });
 
-gulp.task("build", function () {
+gulp.task("build", ["tsd"], function () {
     var tsResult = gulp.src(sourceGlob)
         .pipe(ts(tsSourceProject));
 
@@ -56,7 +56,7 @@ gulp.task("watch-build", ["build"], function () {
     gulp.watch(sourceGlob, ["build"]);
 });
 
-gulp.task("build-tests", function () {
+gulp.task("build-tests", ["tsd"], function () {
     var tsResult = gulp.src(testGlob)
         .pipe(ts(tsTestProject));
 
