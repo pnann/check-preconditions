@@ -22,7 +22,7 @@ $ npm install check-preconditions
 ## Usage
 
 ```javascript
-var CheckPreconditions = require("check-preconditions"); //For the minfied version: window.CheckPreconditions
+var CheckPreconditions = require("check-preconditions"); //For the minified version: window.CheckPreconditions
 var check = CheckPreconditions.check;
 
 var blah = null;
@@ -49,7 +49,7 @@ failures back to their source in situations where you don't have a stacktrace.
 var check = CheckPreconditions.of("Logger");
 
 var blah = null;
-check(blah).is.a.string(); //Throws "[Logger] Check failed: null was a String"
+check(blah).is.a.string(); //Throws "[Logger] Check failed: null was not a String"
 check(blah, "blah").is.a.string(); //Throws "[Logger] Check failed: blah (null) was not a String"
 check(blah).is.not.a.string(); //OK!
 ```
