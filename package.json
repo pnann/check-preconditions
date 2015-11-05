@@ -4,6 +4,10 @@
   "description": "A small and simple ES3 compatible preconditions library for Node and the browser.",
   "author": "Paul Nann",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pnann/check-preconditions.git"
+  },
   "main": "lib/src/index.js",
   "scripts": {
     "test": "gulp test"
