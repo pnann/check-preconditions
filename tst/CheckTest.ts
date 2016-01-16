@@ -46,7 +46,8 @@ describe("Check", function () {
     var runExpectedTest = function (testKey: string, values: any[], negated: boolean) {
         for (var value of values) {
             expect(function () {
-                new Check(BASE_NAME, value, testKey, negated)[testKey]();
+                var result = new Check(BASE_NAME, value, testKey, negated)[testKey]();
+                expect(result).to.equal(value);
             }).to.not.throw();
 
             expect(function () {
@@ -90,7 +91,8 @@ describe("Check", function () {
     describe("true", function () {
         it("should properly handle truthiness", function () {
             expect(function () {
-                new Check(BASE_NAME, true).is.true();
+                var result = new Check(BASE_NAME, true).is.true();
+                expect(result).is.true;
             }).to.not.throw();
 
             for (var value of wonkyMap.trueList) {
@@ -104,7 +106,8 @@ describe("Check", function () {
     describe("false", function () {
         it("should properly handle falsiness", function () {
             expect(function () {
-                new Check(BASE_NAME, false).is.false();
+                var result = new Check(BASE_NAME, false).is.false();
+                expect(result).is.false;
             }).to.not.throw();
 
             for (var value of wonkyMap.falseList) {

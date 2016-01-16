@@ -1,4 +1,4 @@
-interface Check {
+interface Check<T> {
 
     /**
      * Passthrough properties, these have no affect on the instance. They can be called ad nauseum and in any order.
@@ -7,9 +7,9 @@ interface Check {
      * check(blah).is.an.object();
      * //etc.
      */
-    is: Check;
-    a: Check;
-    an: Check;
+    is: Check<T>;
+    a: Check<T>;
+    an: Check<T>;
 
     /**
      * Inverts the instance's check. This can only be used once per Check instance, so you can't not not something.
@@ -19,20 +19,20 @@ interface Check {
      * check(blah).is.a.string(); //OK!
      * check(blah).is.not.a.string(); //Throws
      */
-    not: Check;
+    not: Check<T>;
 
     /**
      * Type checks. These will throw if the target is not of the given type. Number includes NaN.
      */
-    function(): void;
-    object(): void;
-    number(): void;
-    string(): void;
-    array(): void;
-    null(): void;
-    undefined(): void;
-    true(): void;
-    false(): void;
+    function(): T;
+    object(): T;
+    number(): T;
+    string(): T;
+    array(): T;
+    null(): T;
+    undefined(): T;
+    true(): T;
+    false(): T;
 
     /**
      * Check that the target is empty. This check passes if the target is any of the following:
@@ -40,12 +40,12 @@ interface Check {
      *  - an array with no elements
      *  - an empty string
      */
-    empty(): void;
+    empty(): T;
 
     /**
      * Check whether the target exists. This is defined as being neither null nor undefined.
      */
-    exists(): void;
+    exists(): T;
 }
 
 declare module "check-preconditions" {
@@ -55,14 +55,14 @@ declare module "check-preconditions" {
      *
      * @param {string} baseName - A baseName to link created Checks to. Usually a Class or Module name.
      */
-    export function of(baseName: string): (target: any, name?: string) => Check
+    export function of(baseName: string): <T>(target: T, name?: string) => Check<T>
 
     /**
      * Check the given target with an optional name. If a name is given it will be included in the Error thrown
      * when the Check fails.
      *
-     * @param {any} target - A thing to check against.
+     * @param {T} target - A thing to check against.
      * @param {string} [name] - An optional name for the target.
      */
-    export function check(target: any, name?: string): Check
+    export function check<T>(target: T, name?: string): Check<T>
 }

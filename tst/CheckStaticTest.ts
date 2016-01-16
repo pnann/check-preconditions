@@ -44,6 +44,13 @@ describe("CheckStatic", function () {
                 var instance = CheckStatic();
                 instance.check(null).is.not.null();
             }).to.throw();
-        })
+        });
+
+        it("should return the target passed in", function () {
+            var instance = CheckStatic();
+            var input = "targetString";
+            var output = instance.check(input).is.a.string();
+            expect(input).to.equal(output);
+        });
     });
 });

@@ -2,9 +2,9 @@ import Check = require("./Check");
 
 interface CheckStatic {
     of: (baseName: string) => {
-        check: (target: any, targetName?: string) => Check;
+        check: <T>(target: T, targetName?: string) => Check<T>;
     },
-    check: (target: any, targetName?: string) => Check
+    check: <T>(target: T, targetName?: string) => Check<T>
 }
 
 var initialize = function (checkClass = Check): CheckStatic {

@@ -5,9 +5,9 @@
  * A check is terminated in a call to one of its assertion methods, for instance {@link Check#object}. The check will
  * throw when its assertion fails and will otherwise do nothing.
  */
-class Check {
+class Check<T> {
 
-    private target: any;
+    private target: T;
     private targetName: string;
     private baseName: string;
     private negated: boolean;
@@ -18,7 +18,7 @@ class Check {
      * @param {string} [targetName] - An optional target name to include if the check fails.
      * @param {boolean} [negated] - Whether or not this check should be negated.
      */
-    constructor(baseName: string, target: any, targetName?: string, negated?: boolean) {
+    constructor(baseName: string, target: T, targetName?: string, negated?: boolean) {
         this.baseName = baseName;
         this.target = target;
         this.targetName = targetName;
@@ -31,54 +31,54 @@ class Check {
     public is = this;
     public a = this;
     public an = this;
-    public not: Check;
+    public not: Check<T>;
 
-    public function(): void {
+    public function(): T {
         return this.checkType("Function");
     }
 
-    public object(): void {
+    public object(): T {
         return this.checkType("Object");
     }
 
-    public number(): void {
+    public number(): T {
         return this.checkType("Number");
     }
 
-    public string(): void {
+    public string(): T {
         return this.checkType("String");
     }
 
-    public array(): void {
+    public array(): T {
         return this.checkType("Array");
     }
 
-    public null(): void {
+    public null(): T {
         return this.verify(this.target === null, "null");
     }
 
-    public undefined(): void {
+    public undefined(): T {
         return this.verify(typeof this.target === "undefined", "undefined");
     }
 
-    public empty(): void {
-        return this.verify(this.target === null || typeof this.target === "undefined" || this.target === ""
-            || (this.isType("Array") && this.target.length === 0) || (this.isType("Object") && !this.hasProperties()), "empty");
+    public empty(): T {
+        return this.verify(this.target === null || typeof this.target === "undefined" || (<any> this.target) === ""
+            || (this.isType("Array") && (<any> this.target).length === 0) || (this.isType("Object") && !this.hasProperties()), "empty");
     }
 
-    public exists(): void {
+    public exists(): T {
         return this.verify(typeof this.target !== "undefined" && this.target !== null, "null or undefined");
     }
 
-    public true(): void {
-        return this.verify(this.target === true, "true");
+    public true(): T {
+        return this.verify((<any> this.target) === true, "true");
     }
 
-    public false(): void {
-        return this.verify(this.target === false, "false");
+    public false(): T {
+        return this.verify((<any> this.target) === false, "false");
     }
 
-    private checkType(type: string) {
+    private checkType(type: string): T {
         return this.verify(this.isType(type), `a ${type}`);
     }
 
@@ -102,12 +102,14 @@ class Check {
         return false;
     }
 
-    private verify(conditional: boolean, caseString: string) {
+    private verify(conditional: boolean, caseString: string): T {
         if (this.negated ? conditional : !conditional) {
             var prefix = this.baseName ? `[${this.baseName}] ` : "";
             var target = this.targetName ? `${this.targetName} (${this.target})` : `${this.target}`;
             throw new Error(`${prefix}Check failed: ${target} was ${this.negated ? "" : "not "}${caseString}`);
         }
+
+        return this.target;
     }
 }
 
