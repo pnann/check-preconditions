@@ -67,7 +67,7 @@ class Check<T> {
     }
 
     public exists(): T {
-        return this.verify(typeof this.target !== "undefined" && this.target !== null, "null or undefined");
+        return this.verify(typeof this.target !== "undefined" && this.target !== null, "defined and non-null");
     }
 
     public true(): T {
