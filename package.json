@@ -1,6 +1,6 @@
 {
   "name": "check-preconditions",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "A small and simple ES3 compatible preconditions library for Node and the browser.",
   "author": "Paul Nann",
   "license": "MIT",
