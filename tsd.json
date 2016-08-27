@@ -6,25 +6,25 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "assertion-error/assertion-error.d.ts": {
-      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
+      "commit": "88c0d5f868bc184d70b6799d36b1946787beb48d"
     },
     "chai/chai.d.ts": {
-      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
+      "commit": "88c0d5f868bc184d70b6799d36b1946787beb48d"
     },
     "mocha/mocha.d.ts": {
-      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
+      "commit": "88c0d5f868bc184d70b6799d36b1946787beb48d"
     },
     "node/node.d.ts": {
-      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
+      "commit": "88c0d5f868bc184d70b6799d36b1946787beb48d"
     },
     "sinon/sinon.d.ts": {
-      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
+      "commit": "88c0d5f868bc184d70b6799d36b1946787beb48d"
     },
     "sinon-chai/sinon-chai.d.ts": {
-      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
+      "commit": "88c0d5f868bc184d70b6799d36b1946787beb48d"
     },
     "underscore/underscore.d.ts": {
-      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
+      "commit": "88c0d5f868bc184d70b6799d36b1946787beb48d"
     }
   }
 }

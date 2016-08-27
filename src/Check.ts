@@ -23,7 +23,7 @@ class Check<T> {
         this.target = target;
         this.targetName = targetName;
         this.negated = negated;
-        if(!negated) {
+        if (!negated) {
             this.not = new Check(baseName, target, targetName, true);
         }
     }
