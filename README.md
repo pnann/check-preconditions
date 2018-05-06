@@ -1,6 +1,4 @@
-# check-preconditions [![Build Status](https://travis-ci.org/pnann/check-preconditions.svg)](https://travis-ci.org/pnann/check-preconditions) ![npm dependencies](https://david-dm.org/pnann/check-preconditions.svg) [![Coverage Status](https://coveralls.io/repos/pnann/check-preconditions/badge.svg?branch=master&service=github)](https://coveralls.io/github/pnann/check-preconditions?branch=master)
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/pnann/check-preconditions.svg)](https://greenkeeper.io/)
+# check-preconditions [![Build Status](https://travis-ci.org/pnann/check-preconditions.svg)](https://travis-ci.org/pnann/check-preconditions) ![npm dependencies](https://david-dm.org/pnann/check-preconditions.svg) [![Coverage Status](https://coveralls.io/repos/pnann/check-preconditions/badge.svg?branch=master&service=github)](https://coveralls.io/github/pnann/check-preconditions?branch=master) [![Greenkeeper badge](https://badges.greenkeeper.io/pnann/check-preconditions.svg)](https://greenkeeper.io/)
 
 > A small and simple preconditions library for Node and the browser.
 
