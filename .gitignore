@@ -2,3 +2,4 @@ node_modules/
 coverage/
 typings/
 .idea/
+.nyc_output/

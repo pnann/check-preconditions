@@ -1,3 +1,4 @@
-import CheckStatic = require("./CheckStatic");
+import {Check} from "./Check";
 
-export = (CheckStatic());
+export const of = Check.of;
+export const check = Check.check;

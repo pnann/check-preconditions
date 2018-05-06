@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "es2015",
+    "module": "commonjs",
     "target": "es3",
     "lib": [
       "es5",
@@ -8,11 +8,12 @@
       "dom"
     ],
     "inlineSourceMap": true,
-    "outDir": "lib",
-    "declaration": true
+    "outDir": "lib/tests",
+    "declaration": false
   },
   "include": [
-    "src"
+    "src",
+    "tst"
   ],
   "exclude": [
     "node_modules"

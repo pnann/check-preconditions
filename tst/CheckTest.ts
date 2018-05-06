@@ -1,25 +1,23 @@
-/// <reference path="../typings/tsd.d.ts" />
+import * as chai from "chai";
+import {chain, contains, keys} from "underscore";
+import {Check} from "../src/Check";
 
-import chai = require("chai");
-import _ = require("underscore");
-var expect = chai.expect;
-
-import Check = require("../src/Check");
+const expect = chai.expect;
 
 describe("Check", function () {
     const BASE_NAME = "TEST";
-    var mockObject = {};
-    var mockArray = [];
+    const mockObject = {};
+    const mockArray = [];
 
-    var baseClass = function () {
+    const baseClass = function () {
         this.blah = "blah"
     };
-    var extendedClass = function () {
+    const extendedClass = function () {
     };
     extendedClass.prototype = new baseClass();
-    var mockExtendedObject = (new extendedClass());
+    const mockExtendedObject = (new extendedClass());
 
-    var testData = {
+    const testData = {
         "function": [function () {
         }],
         "object": [mockObject, mockExtendedObject, {"blah": "blah"}],
@@ -31,7 +29,7 @@ describe("Check", function () {
         "empty": [null, undefined, mockObject, mockArray, mockExtendedObject, ""]
     };
 
-    var wonkyMap = {
+    const wonkyMap = {
         trueList: [1, "1", [1]],
         falseList: [0, "0", "", [], [[]], [0]]
     };
@@ -43,30 +41,32 @@ describe("Check", function () {
      * @param {any[]} values - An array of values to check against.
      * @param {boolean} negated - Whether or not this test should check the negated case.
      */
-    var runExpectedTest = function (testKey: string, values: any[], negated: boolean) {
-        for (var value of values) {
-            expect(function () {
-                var result = new Check(BASE_NAME, value, testKey, negated)[testKey]();
-                expect(result).to.equal(value);
-            }).to.not.throw();
+    const runExpectedTest = function (testKey: string, values: any[], negated: boolean) {
+        for (const value of values) {
+            for (const baseName of [BASE_NAME, null, undefined]) {
+                expect(function () {
+                    const result = new Check(baseName, value, testKey, negated)[testKey]();
+                    expect(result).to.equal(value);
+                }).to.not.throw();
 
-            expect(function () {
-                new Check(BASE_NAME, value, testKey, !negated)[testKey]();
-            }).to.throw();
+                expect(function () {
+                    new Check(baseName, value, testKey, !negated)[testKey]();
+                }).to.throw();
+            }
         }
     };
 
     describe("type checks", function () {
-        _.keys(testData).forEach(function (testKey) {
+        keys(testData).forEach(function (testKey) {
             describe(testKey, function () {
                 it(`should properly handle ${testKey} values`, function () {
-                    var values = testData[testKey];
+                    const values = testData[testKey];
                     runExpectedTest(testKey, values, false);
                 });
 
                 it(`should properly handle non-${testKey} values`, function () {
-                    var values = <any> _.chain(testData).values().flatten(true).uniq().reject(function (value) {
-                        return _.contains(testData[testKey], value);
+                    const values = <any> chain(testData).values().flatten(true).uniq().reject(function (value) {
+                        return contains(testData[testKey], value);
                     }).value();
                     runExpectedTest(testKey, values, true);
                 });
@@ -76,7 +76,7 @@ describe("Check", function () {
 
     describe("exists", function () {
         it("should properly handle non null or undefined values", function () {
-            var values = <any> _.chain(testData).values().flatten(true).uniq().filter(function (value) {
+            const values = <any> chain(testData).values().flatten(true).uniq().filter(function (value) {
                 return value !== null && value !== undefined
             }).value();
 
@@ -91,11 +91,11 @@ describe("Check", function () {
     describe("true", function () {
         it("should properly handle truthiness", function () {
             expect(function () {
-                var result = new Check(BASE_NAME, true).is.true();
+                const result = new Check(BASE_NAME, true).is.true();
                 expect(result).is.true;
             }).to.not.throw();
 
-            for (var value of wonkyMap.trueList) {
+            for (const value of wonkyMap.trueList) {
                 expect(function () {
                     new Check(BASE_NAME, value).is.true();
                 }).to.throw();
@@ -106,15 +106,51 @@ describe("Check", function () {
     describe("false", function () {
         it("should properly handle falsiness", function () {
             expect(function () {
-                var result = new Check(BASE_NAME, false).is.false();
+                const result = new Check(BASE_NAME, false).is.false();
                 expect(result).is.false;
             }).to.not.throw();
 
-            for (var value of wonkyMap.falseList) {
+            for (const value of wonkyMap.falseList) {
                 expect(function () {
                     new Check(BASE_NAME, value).is.false();
                 }).to.throw();
             }
+        });
+    });
+
+    describe("Check.of", function () {
+        it("should returns a function which when called will create a Check instance", () => {
+            const check = Check.of(BASE_NAME);
+            const target = "target";
+            const targetName = "target-name";
+
+            const result = check(target, targetName);
+            expect(result).is.an.instanceOf(Check);
+        });
+
+        it("should return a function which when called will create a Check instance, even if no targetName is given", () => {
+            const check = Check.of(BASE_NAME);
+            const target = "target";
+
+            const result = check(target);
+            expect(result).is.an.instanceOf(Check);
+        });
+    });
+
+    describe("Check.check", function () {
+        it("should returns a Check instance", () => {
+            const target = "target";
+            const targetName = "target-name";
+            const result = Check.check(target, targetName);
+
+            expect(result).is.an.instanceOf(Check);
+        });
+
+        it("should returns a Check instance, even if no targetName is given", () => {
+            const target = "target";
+            const result = Check.check(target);
+
+            expect(result).is.an.instanceOf(Check);
         });
     });
 });

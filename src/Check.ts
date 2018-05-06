@@ -7,10 +7,10 @@
  */
 class Check<T> {
 
-    private target: T;
-    private targetName: string;
-    private baseName: string;
-    private negated: boolean;
+    private readonly target: T;
+    private readonly targetName: string;
+    private readonly baseName: string;
+    private readonly negated: boolean;
 
     /**
      * @param {string} baseName - The base name to link this instance to. Can be null.
@@ -28,12 +28,20 @@ class Check<T> {
         }
     }
 
+    static of<T>(baseName: string): (target: T, targetName?: string) => Check<T> {
+        return (target: T, targetName?: string) => new Check(baseName, target, targetName);
+    }
+
+    static check<T>(target: T, targetName?: string): Check<T> {
+        return new Check(null, target, targetName);
+    }
+
     public is = this;
     public a = this;
     public an = this;
     public not: Check<T>;
 
-    public function(): T {
+    public function (): T {
         return this.checkType("Function");
     }
 
@@ -93,7 +101,7 @@ class Check<T> {
     }
 
     private hasProperties(): boolean {
-        for (var prop in this.target) {
+        for (let prop in this.target) {
             if (this.target.hasOwnProperty(prop)) {
                 return true;
             }
@@ -104,8 +112,8 @@ class Check<T> {
 
     private verify(conditional: boolean, caseString: string): T {
         if (this.negated ? conditional : !conditional) {
-            var prefix = this.baseName ? `[${this.baseName}] ` : "";
-            var target = this.targetName ? `${this.targetName} (${this.target})` : `${this.target}`;
+            const prefix = this.baseName ? `[${this.baseName}] ` : "";
+            const target = this.targetName ? `${this.targetName} (${this.target})` : `${this.target}`;
             throw new Error(`${prefix}Check failed: ${target} was ${this.negated ? "" : "not "}${caseString}`);
         }
 
@@ -113,4 +121,4 @@ class Check<T> {
     }
 }
 
-export = Check;
+export {Check};
