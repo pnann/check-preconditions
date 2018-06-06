@@ -28,8 +28,8 @@ class Check<T> {
         }
     }
 
-    static of<T>(baseName: string): (target: T, targetName?: string) => Check<T> {
-        return (target: T, targetName?: string) => new Check(baseName, target, targetName);
+    static of(baseName: string): <T>(target: T, targetName?: string) => Check<T> {
+        return <T>(target: T, targetName?: string) => new Check(baseName, target, targetName);
     }
 
     static check<T>(target: T, targetName?: string): Check<T> {

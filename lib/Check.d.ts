@@ -17,7 +17,7 @@ declare class Check<T> {
      * @param {boolean} [negated] - Whether or not this check should be negated.
      */
     constructor(baseName: string, target: T, targetName?: string, negated?: boolean);
-    static of<T>(baseName: string): (target: T, targetName?: string) => Check<T>;
+    static of(baseName: string): <T>(target: T, targetName?: string) => Check<T>;
     static check<T>(target: T, targetName?: string): Check<T>;
     is: this;
     a: this;
