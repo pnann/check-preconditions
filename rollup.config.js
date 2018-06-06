@@ -1,4 +1,4 @@
-import uglify from "rollup-plugin-uglify";
+import {terser} from "rollup-plugin-terser";
 
 export default [{
     input: "lib/index.js",
@@ -15,6 +15,6 @@ export default [{
         name: "CheckPreconditions"
     }],
     plugins: [
-        uglify()
+        terser()
     ]
 }];
