@@ -43,7 +43,7 @@
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "nyc": "^13.0.1",
-    "rollup": "^0.66.2",
+    "rollup": "^0.67.0",
     "rollup-plugin-terser": "^3.0.0",
     "source-map-support": "^0.5.9",
     "ts-node": "^7.0.1",
