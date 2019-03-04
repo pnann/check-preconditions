@@ -1,4 +1,11 @@
-import {Check} from "./Check";
+import { Check as Preconditions } from "./Check";
 
-export const of = Check.of;
-export const check = Check.check;
+// Needed for backwards compatibility
+const of = Preconditions.of;
+const check = Preconditions.check;
+
+export {
+    Preconditions,
+    of,
+    check
+};
