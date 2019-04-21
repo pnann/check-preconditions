@@ -34,15 +34,15 @@ declare class Check<T> {
     exists(): T;
     true(): T;
     false(): T;
-    private checkType(type);
+    private checkType;
     /**
      * Check whether or not the target is of the given type. This is done using toString in order to get around the
      * issues with JavaScript typeof checking.
      *
      * @param {string} type - The type string to compare against.
      */
-    private isType(type);
-    private hasProperties();
-    private verify(conditional, caseString);
+    private isType;
+    private hasProperties;
+    private verify;
 }
 export { Check };

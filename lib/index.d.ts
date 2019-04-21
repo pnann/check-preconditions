@@ -1,3 +1,4 @@
-import { Check } from "./Check";
-export declare const of: typeof Check.of;
-export declare const check: typeof Check.check;
+import { Check as Preconditions } from "./Check";
+declare const of: typeof Preconditions.of;
+declare const check: typeof Preconditions.check;
+export { Preconditions, of, check };
