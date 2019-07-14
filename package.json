@@ -38,16 +38,16 @@
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
-    "@types/mocha": "^5.2.6",
-    "@types/underscore": "^1.8.14",
+    "@types/mocha": "^5.2.7",
+    "@types/underscore": "^1.9.2",
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
-    "nyc": "^14.0.0",
-    "rollup": "^1.10.1",
-    "rollup-plugin-terser": "^5.0.0",
+    "nyc": "^14.1.1",
+    "rollup": "^1.16.7",
+    "rollup-plugin-terser": "^5.1.1",
     "source-map-support": "^0.5.12",
-    "ts-node": "^8.1.0",
-    "typescript": "^3.4.4",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3",
     "underscore": "^1.9.1"
   },
   "dependencies": {}
