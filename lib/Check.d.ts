@@ -34,6 +34,14 @@ declare class Check<T> {
     exists(): T;
     true(): T;
     false(): T;
+    greaterThan(num: number): T;
+    greaterThanOrEqualTo(num: number): T;
+    lessThan(num: number): T;
+    lessThanOrEqualTo(num: number): T;
+    gt: (num: number) => T;
+    gte: (num: number) => T;
+    lt: (num: number) => T;
+    lte: (num: number) => T;
     private checkType;
     /**
      * Check whether or not the target is of the given type. This is done using toString in order to get around the

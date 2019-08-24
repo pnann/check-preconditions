@@ -41,7 +41,7 @@ class Check<T> {
     public an = this;
     public not: Check<T>;
 
-    public function (): T {
+    public function(): T {
         return this.checkType("Function");
     }
 
@@ -85,6 +85,28 @@ class Check<T> {
     public false(): T {
         return this.verify((<any> this.target) === false, "false");
     }
+
+    public greaterThan(num: number): T {
+        return this.verify((<any> this.target) > num, "greater than");
+    }
+
+    public greaterThanOrEqualTo(num: number): T {
+        return this.verify((<any> this.target) >= num, "greater than or equal to");
+    }
+
+    public lessThan(num: number): T {
+        return this.verify((<any> this.target) < num, "less than");
+    }
+
+    public lessThanOrEqualTo(num: number): T {
+        return this.verify((<any> this.target) <= num, "less than or equal to");
+    }
+
+    // Aliases for numerical checks
+    public gt = this.greaterThan;
+    public gte = this.greaterThanOrEqualTo;
+    public lt = this.lessThan;
+    public lte = this.lessThanOrEqualTo;
 
     private checkType(type: string): T {
         return this.verify(this.isType(type), `a ${type}`);

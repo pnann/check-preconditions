@@ -4,6 +4,16 @@ import {Check} from "../src/Check";
 
 const expect = chai.expect;
 
+type NumericalCheckAliases =
+    "greaterThan"
+    | "gt"
+    | "greaterThanOrEqualTo"
+    | "gte"
+    | "lessThan"
+    | "lt"
+    | "lessThanOrEqualTo"
+    | "lte";
+
 describe("Check", function () {
     const BASE_NAME = "TEST";
     const mockObject = {};
@@ -115,6 +125,40 @@ describe("Check", function () {
                     new Check(BASE_NAME, value).is.false();
                 }).to.throw();
             }
+        });
+    });
+
+    describe("numerical checks", function () {
+
+        const runNumericalTest = (aliases: NumericalCheckAliases[], targetValue: number, successValues: number[], failValues: number[]) => {
+            for (const alias of aliases) {
+                for (const successValue of successValues) {
+                    const result = new Check(BASE_NAME, targetValue).is[alias](successValue);
+                    expect(result).to.equal(targetValue);
+                }
+
+                for (const failValue of failValues) {
+                    expect(function () {
+                        const result = new Check(BASE_NAME, targetValue).is[alias](failValue);
+                    }).to.throw();
+                }
+            }
+        };
+
+        describe("greaterThan", function () {
+            runNumericalTest(["greaterThan", "gt"], 1, [-1, 0], [1, 2]);
+        });
+
+        describe("greaterThanOrEqualTo", function () {
+            runNumericalTest(["greaterThanOrEqualTo", "gte"], 1, [0, 1], [2]);
+        });
+
+        describe("lessThan", function () {
+            runNumericalTest(["lessThan", "lt"], 1, [2], [0, 1]);
+        });
+
+        describe("greaterThanOrEqualTo", function () {
+            runNumericalTest(["lessThanOrEqualTo", "lte"], 1, [1, 2], [0]);
         });
     });
 
