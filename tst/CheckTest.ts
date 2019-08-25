@@ -128,8 +128,7 @@ describe("Check", function () {
         });
     });
 
-    describe("numerical checks", function () {
-
+    describe("basic numerical checks", function () {
         const runNumericalTest = (aliases: NumericalCheckAliases[], targetValue: number, successValues: number[], failValues: number[]) => {
             for (const alias of aliases) {
                 for (const successValue of successValues) {
@@ -159,6 +158,31 @@ describe("Check", function () {
 
         describe("greaterThanOrEqualTo", function () {
             runNumericalTest(["lessThanOrEqualTo", "lte"], 1, [1, 2], [0]);
+        });
+    });
+
+    describe("numerical range checks", function () {
+        const runNumericalTest = (alias: ("between" | "within"), targetValue: number, successValues: [number, number][], failValues: [number, number][]) => {
+            for (const successValue of successValues) {
+                const result = new Check(BASE_NAME, targetValue).is[alias](successValue[0], successValue[1]);
+                expect(result).to.equal(targetValue);
+            }
+
+            for (const failValue of failValues) {
+                expect(function () {
+                    const result = new Check(BASE_NAME, targetValue).is[alias](failValue[0], failValue[1]);
+                }).to.throw();
+            }
+        };
+
+        describe("between", function () {
+            runNumericalTest("between", 1, [[0, 2]], [[0, 1], [1, 2], [2, 3]]);
+            runNumericalTest("between", 1.5, [[1, 2]], [[1, 1.5], [1.5, 2]]);
+        });
+
+        describe("within", function () {
+            runNumericalTest("within", 1, [[0, 2], [1, 2], [0, 1]], [[-1, 0], [2, 3]]);
+            runNumericalTest("within", 1.5, [[1, 2], [1, 1.5], [1.5, 2]], []);
         });
     });
 

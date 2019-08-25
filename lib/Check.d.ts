@@ -38,6 +38,8 @@ declare class Check<T> {
     greaterThanOrEqualTo(num: number): T;
     lessThan(num: number): T;
     lessThanOrEqualTo(num: number): T;
+    between(floor: number, ceiling: number): T;
+    within(floor: number, ceiling: number): T;
     gt: (num: number) => T;
     gte: (num: number) => T;
     lt: (num: number) => T;

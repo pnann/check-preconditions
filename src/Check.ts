@@ -102,6 +102,14 @@ class Check<T> {
         return this.verify((<any> this.target) <= num, "less than or equal to");
     }
 
+    public between(floor: number, ceiling: number): T {
+        return this.verify((<any> this.target) > floor && (<any> this.target) < ceiling, "between (exclusive)");
+    }
+
+    public within(floor: number, ceiling: number): T {
+        return this.verify((<any> this.target) >= floor && (<any> this.target) <= ceiling, "within (inclusive)");
+    }
+
     // Aliases for numerical checks
     public gt = this.greaterThan;
     public gte = this.greaterThanOrEqualTo;
